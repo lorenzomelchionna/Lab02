@@ -5,20 +5,20 @@ import java.util.List;
 
 public class AlienDictionary {
 	
-	List<Word> Dizionario;
+	List<WordEnhanced> Dizionario;
 
 	public AlienDictionary() {
-		Dizionario = new LinkedList<Word>();
+		Dizionario = new LinkedList<WordEnhanced>();
 	}
 	
 	public void addWord(String alienWord, String translaction) {
 		
-		Word tempWord = new Word(alienWord, translaction);
+		WordEnhanced tempWord = new WordEnhanced(alienWord, translaction);
 		
-		for(Word w : Dizionario)
+		for(WordEnhanced w : Dizionario)
 			if(w.equals(tempWord)) {
 				
-				w.setTranslation(translaction);
+				w.addTranslation(translaction);
 				return;
 				
 			}
@@ -27,11 +27,11 @@ public class AlienDictionary {
 		
 	}
 	
-	public String translateWord(String alienWord) {
+	public List<String> translateWord(String alienWord) {
 		
-		for(Word w : Dizionario)
+		for(WordEnhanced w : Dizionario)
 			if(w.getAlienWord().equals(alienWord))
-				return w.getTranslation();
+				return w.getTranslations();
 		
 		return null;
 		

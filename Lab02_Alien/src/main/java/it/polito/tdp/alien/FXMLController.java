@@ -42,9 +42,21 @@ public class FXMLController {
     		
     		alienWord = paroleInserite[0].toLowerCase();
     		
-    		if(model.translateWord(alienWord) != null)
-    			txtDictionary.appendText("La traduzione di "+alienWord+" è "+model.translateWord(alienWord)+".\n");
-    		else if(alienWord.equals("")) 
+    		if(model.translateWord(alienWord) != null) {
+    			
+    			if(model.translateWord(alienWord).size() == 1)
+    				txtDictionary.appendText("La traduzione di "+alienWord+" è "+model.translateWord(alienWord)+".\n");
+    			else {
+    				
+    				txtDictionary.appendText("Le traduzioni di "+alienWord+" sono ");
+    				for(String s : model.translateWord(alienWord))
+    					txtDictionary.appendText(s+" ");
+    				
+    				txtDictionary.appendText("\n");
+    				
+    			}
+    			
+    		} else if(alienWord.equals("")) 
     			txtDictionary.appendText("Non hai inserito nessuna parola!\n");
     		else
     			txtDictionary.appendText("La parola "+alienWord+" non è presente nel dizionario.\n");
@@ -55,7 +67,11 @@ public class FXMLController {
     		translaction = paroleInserite[1].toLowerCase();
     		
     		model.addWord(alienWord, translaction);
-    		txtDictionary.appendText("Aggiunto: "+alienWord+" --> "+translaction+"\n");
+    		txtDictionary.appendText("Aggiunto: "+alienWord+" --> ");
+    		for(String s : model.translateWord(alienWord))
+    			txtDictionary.appendText(s+" ");
+    		
+    		txtDictionary.appendText("\n");
     		
     	} else 
     		txtDictionary.appendText("Devi inserire 1 o 2 parole!\n");
